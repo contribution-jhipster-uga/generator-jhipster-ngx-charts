@@ -15,7 +15,7 @@ import { ProductService } from './product.service';
   templateUrl: './product-update.component.html'
 })
 export class ProductUpdateComponent implements OnInit {
-  isSaving: boolean;
+  isSaving!: boolean;
 
   editForm = this.fb.group({
     id: [],
@@ -29,7 +29,7 @@ export class ProductUpdateComponent implements OnInit {
 
   constructor(protected productService: ProductService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ product }) => {
       this.updateForm(product);

@@ -174,12 +174,12 @@ module.exports = class extends BaseGenerator {
             this.rewriteFile(
                 webappDir + 'app/entities/entity.module.ts',
                 '/* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */',
-                "{path: 'chart',loadChildren: () => import('./chart/chart.module').then(m => m.ChartsChartModule)},"
+                ',\n      {\n        path: \'chart\',\n        loadChildren: () => import(\'./chart/chart.module\').then(m => m.ChartsChartModule)\n      }'
             );
             this.rewriteFile(
                 webappDir + 'app/entities/entity.module.ts',
                 '/* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */',
-                "{path: 'product',loadChildren: () => import('./product/product.module').then(m => m.ChartsProductModule)},"
+                ',\n      {\n        path: \'product\',\n        loadChildren: () => import(\'./product/product.module\').then(m => m.ChartsProductModule)\n      }'
             );
 
             var baseNameUpperCase = this.baseName;
@@ -193,7 +193,7 @@ module.exports = class extends BaseGenerator {
             );
             this.rewriteFile(
                 webappDir + 'app/entities/chart/chart.module.ts',
-                '//<--! sharedmodule -->',
+                '// <--! sharedmodule -->',
                 'imports: [' + baseNameUpperCase + 'SharedModule, RouterModule.forChild(chartRoute),NgxChartsModule],'
             );
 
@@ -204,7 +204,7 @@ module.exports = class extends BaseGenerator {
             );
             this.rewriteFile(
                 webappDir + 'app/entities/product/product.module.ts',
-                '//<--! sharedmodule -->',
+                '// <--! sharedmodule -->',
                 'imports: [' + baseNameUpperCase + 'SharedModule, RouterModule.forChild(productRoute)],'
             );
 

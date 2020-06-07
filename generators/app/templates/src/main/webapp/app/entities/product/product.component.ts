@@ -13,35 +13,35 @@ import { ProductDeleteDialogComponent } from './product-delete-dialog.component'
   templateUrl: './product.component.html'
 })
 export class ProductComponent implements OnInit, OnDestroy {
-  products: IProduct[];
-  eventSubscriber: Subscription;
+  products!: IProduct[];
+  eventSubscriber!: Subscription;
 
   constructor(protected productService: ProductService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
 
-  loadAll() {
+  loadAll(): void {
     this.productService.query().subscribe((res: HttpResponse<IProduct[]>) => {
-      this.products = res.body;
+      this.products = res.body || [];
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadAll();
     this.registerChangeInProducts();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: IProduct) {
+  trackId(index: number, item: IProduct): any {
     return item.id;
   }
 
-  registerChangeInProducts() {
+  registerChangeInProducts(): void  {
     this.eventSubscriber = this.eventManager.subscribe('productListModification', () => this.loadAll());
   }
 
-  delete(product: IProduct) {
+  delete(product: IProduct): void  {
     const modalRef = this.modalService.open(ProductDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.product = product;
   }

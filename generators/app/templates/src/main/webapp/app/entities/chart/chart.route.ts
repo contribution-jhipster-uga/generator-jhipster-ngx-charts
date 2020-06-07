@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { EMPTY, Observable, of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
+
 import { IChart, Chart } from 'app/shared/model/chart-model';
 import { ChartService } from './chart.service';
 
@@ -11,12 +12,21 @@ import { ChartComponent } from './chart.component';
 
 @Injectable({ providedIn: 'root' })
 export class ChartResolve implements Resolve<IChart> {
-  constructor(private service: ChartService) {}
+  constructor(private service: ChartService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IChart> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IChart> | Observable<never> {
     const id = route.params['id'];
     if (id) {
-      return this.service.find(id).pipe(map((chart: HttpResponse<Chart>) => chart.body));
+      return this.service.find(id).pipe(
+        flatMap((chart: HttpResponse<Chart>) => {
+          if (chart.body) {
+            return of(chart.body);
+          } else {
+            this.router.navigate(['404']);
+            return EMPTY;
+          }
+        })
+      );
     }
     return of(new Chart());
   }
