@@ -83,8 +83,8 @@ module.exports = class extends BaseGenerator {
         }
 
         // needles variables for imports and package in file;
-        const needle_import = '//<--! import -->';
-        const needle_package = '//<--! package -->';
+        const needleImport = '// <--! import -->';
+        const needlePackage = '// <--! package -->';
 
         // show all variables
         this.log('\n--- some config read from config ---');
@@ -107,79 +107,79 @@ module.exports = class extends BaseGenerator {
         this.log('------\n');
 
         if (this.clientFramework === 'react') {
-            //this.template('dummy.txt', 'dummy-react.txt');
+            // this.template('dummy.txt', 'dummy-react.txt');
         }
         if (this.clientFramework === 'angularX') {
             // add entities Product and Chart
             this.fs.copy(
                 this.templatePath('src/main/webapp/app/entities/product'),
-                this.destinationPath(webappDir + 'app/entities/product')
+                this.destinationPath(`${webappDir}app/entities/product`)
             );
-            this.fs.copy(this.templatePath('src/main/webapp/app/entities/chart'), this.destinationPath(webappDir + 'app/entities/chart'));
+            this.fs.copy(this.templatePath('src/main/webapp/app/entities/chart'), this.destinationPath(`${webappDir}app/entities/chart`));
 
             // add shared model Product and Chart with enum Color and Country
             this.fs.copy(
                 this.templatePath('src/main/webapp/app/shared/model/product.model.ts'),
-                this.destinationPath(webappDir + 'app/shared/model/product.model.ts')
+                this.destinationPath(`${webappDir}app/shared/model/product.model.ts`)
             );
             this.fs.copy(
                 this.templatePath('src/main/webapp/app/shared/model/chart-model.ts'),
-                this.destinationPath(webappDir + 'app/shared/model/chart-model.ts')
+                this.destinationPath(`${webappDir}app/shared/model/chart-model.ts`)
             );
             this.fs.copy(
                 this.templatePath('src/main/webapp/app/shared/model/enumerations/color.model.ts'),
-                this.destinationPath(webappDir + 'app/shared/model/enumerations/color.model.ts')
+                this.destinationPath(`${webappDir}app/shared/model/enumerations/color.model.ts`)
             );
             this.fs.copy(
                 this.templatePath('src/main/webapp/app/shared/model/enumerations/country.model.ts'),
-                this.destinationPath(webappDir + 'app/shared/model/enumerations/country.model.ts')
+                this.destinationPath(`${webappDir}app/shared/model/enumerations/country.model.ts`)
             );
 
             // add entities to menu
 
             this.rewriteFile(
-                webappDir + 'app/layouts/navbar/navbar.component.html',
-                '<!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->',
-                '            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">' +
-                    '<a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">' +
-                    '<span>' +
-                    '<fa-icon icon="th-list"></fa-icon>' +
-                    '<span>' +
-                    'Chart' +
-                    '</span>' +
-                    '</span>' +
-                    '</a>' +
-                    '<ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">' +
-                    '<li>' +
-                    '<a class="dropdown-item" routerLink="chart/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">' +
-                    '<fa-icon icon="asterisk" fixedWidth="true"></fa-icon>' +
-                    '<span>Multiple charts</span>' +
-                    '</li>' +
-                    '<li>' +
-                    '<a class="dropdown-item" routerLink="chart/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">' +
-                    '<fa-icon icon="asterisk" fixedWidth="true"></fa-icon>' +
-                    '<span>Single charts</span>' +
-                    '</li>' +
-                    '<li>' +
-                    '<a class="dropdown-item" routerLink="chart/3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">' +
-                    '<fa-icon icon="asterisk" fixedWidth="true"></fa-icon>' +
-                    '<span>Bubble charts</span>' +
-                    '</li>' +
-                    '</ul>' +
-                    '</li>'
+                `${webappDir}app/layouts/navbar/navbar.component.html',
+                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->,
+                            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu"> 
+                <span> 
+                <fa-icon icon="th-list"></fa-icon> 
+                <span> 
+                Chart 
+                </span> 
+                </span> 
+                </a> 
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu"> 
+                <li> 
+                <a class="dropdown-item" routerLink="chart/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()"> 
+                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon> 
+                <span>Multiple charts</span> 
+                </li> 
+                <li> 
+                <a class="dropdown-item" routerLink="chart/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()"> 
+                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon> 
+                <span>Single charts</span> 
+                </li> 
+                <li> 
+                <a class="dropdown-item" routerLink="chart/3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()"> 
+                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon> 
+                <span>Bubble charts</span> 
+                </li> 
+                </ul> 
+                </li>`
             );
             this.addEntityToMenu('product', false, this.clientFramework);
 
             // add entity to module
             this.rewriteFile(
-                webappDir + 'app/entities/entity.module.ts',
+                `${webappDir}app/entities/entity.module.ts`,
                 '/* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */',
-                ',\n      {\n        path: \'chart\',\n        loadChildren: () => import(\'./chart/chart.module\').then(m => m.ChartsChartModule)\n      }'
+                ",\n      {\n        path: 'chart',\n        loadChildren: () => import('./chart/chart.module').then(m => m.ChartsChartModule)\n      }"
             );
             this.rewriteFile(
-                webappDir + 'app/entities/entity.module.ts',
+                `${webappDir}app/entities/entity.module.ts`,
                 '/* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */',
-                ',\n      {\n        path: \'product\',\n        loadChildren: () => import(\'./product/product.module\').then(m => m.ChartsProductModule)\n      }'
+                ",\n      {\n        path: 'product',\n        loadChildren: () => import('./product/product.module').then(m => m.ChartsProductModule)\n      }"
             );
 
             var baseNameUpperCase = this.baseName;
@@ -187,25 +187,25 @@ module.exports = class extends BaseGenerator {
             console.log(baseNameUpperCase);
 
             this.rewriteFile(
-                webappDir + 'app/entities/chart/chart.module.ts',
-                needle_import,
-                'import { ' + baseNameUpperCase + "SharedModule } from 'app/shared/shared.module';"
+                `${webappDir}app/entities/chart/chart.module.ts`,
+                needleImport,
+                `import { ${baseNameUpperCase}SharedModule } from \'app/shared/shared.module\';`
             );
             this.rewriteFile(
-                webappDir + 'app/entities/chart/chart.module.ts',
+                `${webappDir}app/entities/chart/chart.module.ts`,
                 '// <--! sharedmodule -->',
-                'imports: [' + baseNameUpperCase + 'SharedModule, RouterModule.forChild(chartRoute),NgxChartsModule],'
+                `import { ${baseNameUpperCase}SharedModule, RouterModule.forChild(chartRoute),NgxChartsModule],`
             );
 
             this.rewriteFile(
-                webappDir + 'app/entities/product/product.module.ts',
-                needle_import,
-                'import { ' + baseNameUpperCase + "SharedModule } from 'app/shared/shared.module';"
+                `${webappDir}app/entities/product/product.module.ts`,
+                needleImport,
+                `import { ${baseNameUpperCase}SharedModule } from \'app/shared/shared.module\';`
             );
             this.rewriteFile(
-                webappDir + 'app/entities/product/product.module.ts',
+                `${webappDir}app/entities/product/product.module.ts`,
                 '// <--! sharedmodule -->',
-                'imports: [' + baseNameUpperCase + 'SharedModule, RouterModule.forChild(productRoute)],'
+                `import { ${baseNameUpperCase}SharedModule, RouterModule.forChild(productRoute)],`
             );
 
             // add npm dependencies ngx-charts
@@ -228,19 +228,19 @@ module.exports = class extends BaseGenerator {
 
         // add domain Product and enumartions
 
-        this.template('src/main/java/package/domain/Product.java', javaDir + 'domain/Product.java');
-        this.rewriteFile(javaDir + 'domain/Product.java', needle_package, 'package ' + this.packageName + '.domain;');
-        this.rewriteFile(javaDir + 'domain/Product.java', needle_import, 'import ' + this.packageName + '.domain.enumeration.Country;');
-        this.rewriteFile(javaDir + 'domain/Product.java', needle_import, 'import ' + this.packageName + '.domain.enumeration.Color;');
+        this.template(`src/main/java/package/domain/Product.java', ${javaDir}domain/Product.java`);
+        this.rewriteFile(`${javaDir}domain/Product.java', needlePackage, 'package ${this.packageName}.domain;`);
+        this.rewriteFile(`${javaDir}domain/Product.java', needleImport, 'import ${this.packageName}.domain.enumeration.Country;`);
+        this.rewriteFile(`${javaDir}domain/Product.java', needleImport, 'import ${this.packageName}.domain.enumeration.Color;`);
 
-        this.template('src/main/java/package/domain/enumeration/Color.java', javaDir + 'domain/enumeration/Color.java');
+        this.template(`src/main/java/package/domain/enumeration/Color.java', ${javaDir}domain/enumeration/Color.java`);
 
-        this.template('src/main/java/package/domain/enumeration/Country.java', javaDir + 'domain/enumeration/Country.java');
+        this.template(`src/main/java/package/domain/enumeration/Country.java', ${javaDir}domain/enumeration/Country.java`);
 
-        this.rewriteFile(javaDir + 'domain/enumeration/Color.java', needle_package, 'package ' + this.packageName + '.domain.enumeration;');
+        this.rewriteFile(javaDir + 'domain/enumeration/Color.java', needlePackage, 'package ' + this.packageName + '.domain.enumeration;');
         this.rewriteFile(
             javaDir + 'domain/enumeration/Country.java',
-            needle_package,
+            needlePackage,
             'package ' + this.packageName + '.domain.enumeration;'
         );
 
@@ -260,27 +260,23 @@ module.exports = class extends BaseGenerator {
 
         this.rewriteFile(
             javaDir + 'repository/BubbleSerieEntryProjection.java',
-            needle_package,
+            needlePackage,
             'package ' + this.packageName + '.repository;'
         );
         this.rewriteFile(
             javaDir + 'repository/MultiSerieEntryProjection.java',
-            needle_package,
+            needlePackage,
             'package ' + this.packageName + '.repository;'
         );
+        this.rewriteFile(javaDir + 'repository/ProductChartRepository.java', needlePackage, 'package ' + this.packageName + '.repository;');
         this.rewriteFile(
             javaDir + 'repository/ProductChartRepository.java',
-            needle_package,
-            'package ' + this.packageName + '.repository;'
-        );
-        this.rewriteFile(
-            javaDir + 'repository/ProductChartRepository.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.domain.Product;'
         );
-        this.rewriteFile(javaDir + 'repository/ProductRepository.java', needle_package, 'package ' + this.packageName + '.repository;');
-        this.rewriteFile(javaDir + 'repository/ProductRepository.java', needle_import, 'import ' + this.packageName + '.domain.Product;');
-        this.rewriteFile(javaDir + 'repository/SerieEntryProjection.java', needle_package, 'package ' + this.packageName + '.repository;');
+        this.rewriteFile(javaDir + 'repository/ProductRepository.java', needlePackage, 'package ' + this.packageName + '.repository;');
+        this.rewriteFile(javaDir + 'repository/ProductRepository.java', needleImport, 'import ' + this.packageName + '.domain.Product;');
+        this.rewriteFile(javaDir + 'repository/SerieEntryProjection.java', needlePackage, 'package ' + this.packageName + '.repository;');
 
         // service/dto
 
@@ -290,24 +286,24 @@ module.exports = class extends BaseGenerator {
         this.template('src/main/java/package/service/dto/MultiSerieEntry.java', javaDir + 'service/dto/MultiSerieEntry.java');
         this.template('src/main/java/package/service/dto/SerieEntry.java', javaDir + 'service/dto/SerieEntry.java');
 
-        this.rewriteFile(javaDir + 'service/dto/BubbleEntry.java', needle_package, 'package ' + this.packageName + '.service.dto;');
-        this.rewriteFile(javaDir + 'service/dto/BubbleSerieEntry.java', needle_package, 'package ' + this.packageName + '.service.dto;');
+        this.rewriteFile(javaDir + 'service/dto/BubbleEntry.java', needlePackage, 'package ' + this.packageName + '.service.dto;');
+        this.rewriteFile(javaDir + 'service/dto/BubbleSerieEntry.java', needlePackage, 'package ' + this.packageName + '.service.dto;');
         this.rewriteFile(
             javaDir + 'service/dto/BubbleSerieEntry.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.BubbleSerieEntryProjection;'
         );
-        this.rewriteFile(javaDir + 'service/dto/ChartDTO.java', needle_package, 'package ' + this.packageName + '.service.dto;');
-        this.rewriteFile(javaDir + 'service/dto/MultiSerieEntry.java', needle_package, 'package ' + this.packageName + '.service.dto;');
+        this.rewriteFile(javaDir + 'service/dto/ChartDTO.java', needlePackage, 'package ' + this.packageName + '.service.dto;');
+        this.rewriteFile(javaDir + 'service/dto/MultiSerieEntry.java', needlePackage, 'package ' + this.packageName + '.service.dto;');
         this.rewriteFile(
             javaDir + 'service/dto/MultiSerieEntry.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.MultiSerieEntryProjection;'
         );
-        this.rewriteFile(javaDir + 'service/dto/SerieEntry.java', needle_package, 'package ' + this.packageName + '.service.dto;');
+        this.rewriteFile(javaDir + 'service/dto/SerieEntry.java', needlePackage, 'package ' + this.packageName + '.service.dto;');
         this.rewriteFile(
             javaDir + 'service/dto/SerieEntry.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.SerieEntryProjection;'
         );
 
@@ -316,58 +312,58 @@ module.exports = class extends BaseGenerator {
         this.template('src/main/java/package/web/rest/ProductChartResource.java', javaDir + 'web/rest/ProductChartResource.java');
         this.template('src/main/java/package/web/rest/ProductResource.java', javaDir + 'web/rest/ProductResource.java');
 
-        this.rewriteFile(javaDir + 'web/rest/ProductChartResource.java', needle_package, 'package ' + this.packageName + '.web.rest;');
+        this.rewriteFile(javaDir + 'web/rest/ProductChartResource.java', needlePackage, 'package ' + this.packageName + '.web.rest;');
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.SerieEntryProjection;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.MultiSerieEntryProjection;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.BubbleSerieEntryProjection;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.ProductChartRepository;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.service.dto.SerieEntry;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.service.dto.MultiSerieEntry;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.service.dto.BubbleSerieEntry;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductChartResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.service.dto.ChartDTO;'
         );
 
-        this.rewriteFile(javaDir + 'web/rest/ProductResource.java', needle_package, 'package ' + this.packageName + '.web.rest;');
-        this.rewriteFile(javaDir + 'web/rest/ProductResource.java', needle_import, 'import ' + this.packageName + '.domain.Product;');
+        this.rewriteFile(javaDir + 'web/rest/ProductResource.java', needlePackage, 'package ' + this.packageName + '.web.rest;');
+        this.rewriteFile(javaDir + 'web/rest/ProductResource.java', needleImport, 'import ' + this.packageName + '.domain.Product;');
         this.rewriteFile(
             javaDir + 'web/rest/ProductResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.repository.ProductRepository;'
         );
         this.rewriteFile(
             javaDir + 'web/rest/ProductResource.java',
-            needle_import,
+            needleImport,
             'import ' + this.packageName + '.web.rest.errors.BadRequestAlertException;'
         );
 
