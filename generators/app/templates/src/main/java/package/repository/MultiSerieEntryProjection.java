@@ -1,5 +1,5 @@
 
-//<--! package -->
+// <--! package -->
 
 
 public interface MultiSerieEntryProjection {
@@ -9,7 +9,7 @@ public interface MultiSerieEntryProjection {
 	 */
     public String getSerieName();
 
-	
+
 	/**
 	 * @return the name
 	 */

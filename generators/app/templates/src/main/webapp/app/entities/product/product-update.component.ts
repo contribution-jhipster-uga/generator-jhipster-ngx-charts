@@ -36,7 +36,7 @@ export class ProductUpdateComponent implements OnInit {
     });
   }
 
-  updateForm(product: IProduct) {
+  updateForm(product: IProduct): void {
     this.editForm.patchValue({
       id: product.id,
       name: product.name,
@@ -48,11 +48,11 @@ export class ProductUpdateComponent implements OnInit {
     });
   }
 
-  previousState() {
+  previousState(): void {
     window.history.back();
   }
 
-  save() {
+  save(): void {
     this.isSaving = true;
     const product = this.createFromForm();
     if (product.id !== undefined) {
@@ -65,26 +65,26 @@ export class ProductUpdateComponent implements OnInit {
   private createFromForm(): IProduct {
     return {
       ...new Product(),
-      id: this.editForm.get(['id']).value,
-      name: this.editForm.get(['name']).value,
-      country: this.editForm.get(['country']).value,
-      color: this.editForm.get(['color']).value,
-      quantity: this.editForm.get(['quantity']).value,
-      price: this.editForm.get(['price']).value,
-      date: this.editForm.get(['date']).value != null ? moment(this.editForm.get(['date']).value, DATE_TIME_FORMAT) : undefined
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      country: this.editForm.get(['country'])!.value,
+      color: this.editForm.get(['color'])!.value,
+      quantity: this.editForm.get(['quantity'])!.value,
+      price: this.editForm.get(['price'])!.value,
+      date: this.editForm.get(['date'])!.value != null ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>) {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {
     result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
-  protected onSaveSuccess() {
+  protected onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();
   }
 
-  protected onSaveError() {
+  protected onSaveError(): void {
     this.isSaving = false;
   }
 }

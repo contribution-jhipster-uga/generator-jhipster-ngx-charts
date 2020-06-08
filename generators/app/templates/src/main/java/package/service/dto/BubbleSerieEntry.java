@@ -1,12 +1,12 @@
 
-//<--! package -->
+// <--! package -->
 
 import java.io.Serializable;
 import java.util.*;
 
 import io.swagger.annotations.ApiModelProperty;
 
-//<--! import -->
+// <--! import -->
 
 public class BubbleSerieEntry implements Serializable {
 

@@ -1,5 +1,5 @@
 
-//<--! package -->
+// <--! package -->
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 
-//<--! import -->
+// <--! import -->
 
 /**
  * A Product.
