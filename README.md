@@ -60,7 +60,7 @@ yarn global upgrade generator-jhipster-ngx-charts
 Run the module on a JHipster generated application:
 
 ```bash
-yo jhipster-entity-audit
+yo jhipster-ngx-charts
 ```
 
 This module allows you to use simple entry, multiple entry charts and bubble chart directly.
