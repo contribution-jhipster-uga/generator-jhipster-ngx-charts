@@ -151,7 +151,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     // throw new Error("Method not implemented.");
   }
 
-  previousState(): void  {
+  previousState(): void {
     window.history.back();
   }
 
@@ -245,7 +245,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     `;
   }
 
-  pieTooltipText({data}:{ data: any}) : string {
+  pieTooltipText( {data}: { data: any } ): string {
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 

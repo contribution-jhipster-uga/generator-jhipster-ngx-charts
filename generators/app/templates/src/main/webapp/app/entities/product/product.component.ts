@@ -37,11 +37,11 @@ export class ProductComponent implements OnInit, OnDestroy {
     return item.id;
   }
 
-  registerChangeInProducts(): void  {
+  registerChangeInProducts(): void {
     this.eventSubscriber = this.eventManager.subscribe('productListModification', () => this.loadAll());
   }
 
-  delete(product: IProduct): void  {
+  delete(product: IProduct): void {
     const modalRef = this.modalService.open(ProductDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.product = product;
   }

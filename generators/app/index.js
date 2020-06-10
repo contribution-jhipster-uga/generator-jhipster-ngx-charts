@@ -203,7 +203,7 @@ module.exports = class extends BaseGenerator {
             this.rewriteFile(
                 `${webappDir}app/entities/chart/chart.module.ts`,
                 '// <--! sharedmodule -->',
-                `imports: [ ${baseNameUpperCase}SharedModule, RouterModule.forChild(chartRoute),NgxChartsModule],`
+                `imports: [${baseNameUpperCase}SharedModule, RouterModule.forChild(chartRoute), NgxChartsModule],`
             );
 
             this.rewriteFile(
@@ -214,7 +214,7 @@ module.exports = class extends BaseGenerator {
             this.rewriteFile(
                 `${webappDir}app/entities/product/product.module.ts`,
                 '// <--! sharedmodule -->',
-                `imports: [ ${baseNameUpperCase}SharedModule, RouterModule.forChild(productRoute)],`
+                `imports: [${baseNameUpperCase}SharedModule, RouterModule.forChild(productRoute)],`
             );
 
             // add npm dependencies ngx-charts
@@ -234,6 +234,14 @@ module.exports = class extends BaseGenerator {
         /**
          * Files add in java package
          */
+
+        // add entity to Cache
+
+        this.rewriteFile(
+            `${javaDir}config/CacheConfiguration.java`,
+            '// jhipster-needle-ehcache-add-entry',
+            `createCache(cm, ${this.packageName}.domain.Product.class.getName();`
+        );
 
         // add domain Product and enumartions
 
