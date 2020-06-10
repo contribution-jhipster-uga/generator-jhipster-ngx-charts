@@ -2,7 +2,9 @@ const chalk = require('chalk');
 const semver = require('semver');
 const BaseGenerator = require('generator-jhipster/generators/generator-base');
 const jhipsterConstants = require('generator-jhipster/generators/generator-constants');
+const fs = require('fs');
 const packagejs = require('../../package.json');
+const genUtils = require('../utils');
 
 module.exports = class extends BaseGenerator {
     get initializing() {
@@ -68,6 +70,9 @@ module.exports = class extends BaseGenerator {
         this.clientFramework = this.jhipsterAppConfig.clientFramework;
         this.clientPackageManager = this.jhipsterAppConfig.clientPackageManager;
         this.buildTool = this.jhipsterAppConfig.buildTool;
+        this.enableTranslation = this.jhipsterAppConfig.enableTranslation;
+        this.skipClient = this.jhipsterAppConfig.skipClient;
+        this.languages = this.jhipsterAppConfig.languages;
 
         // use function in generator-base.js from generator-jhipster
         this.angularAppName = this.getAngularAppName();
@@ -135,38 +140,107 @@ module.exports = class extends BaseGenerator {
                 this.destinationPath(`${webappDir}app/shared/model/enumerations/country.model.ts`)
             );
 
-            // add entities to menu
+            // add i18n
+            const files = [];
+            if (this.enableTranslation && !this.skipClient) {
+                this.languages.forEach(language => {
+                    let sourceLanguage = 'en';
+                    if (fs.existsSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/ngxCharts.json`)) {
+                        sourceLanguage = language;
+                    }
+                    files.push({
+                        from: `${webappDir}i18n/${sourceLanguage}/ngxCharts.json`,
+                        to: `${webappDir}i18n/${language}/ngxCharts.json`
+                    });
+                });
+            }
+            genUtils.copyFiles(this, files);
+            this.rewriteFile(
+                `${webappDir}i18n/zh-cn/global.json`,
+                '"jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)"',
+                `
+      "ngxCharts": {
+        "main": "图表",
+        "multipleCharts": "多维图表",
+        "singleCharts": "单维图表",
+        "bubbleCharts": "气泡图表"
+      },`
+            );
+            this.rewriteFile(
+                `${webappDir}i18n/en/global.json`,
+                '"jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)"',
+                `
+      "ngxCharts": {
+        "main": "Chart",
+        "multipleCharts": "Multiple charts",
+        "singleCharts": "Single Charts",
+        "bubbleCharts": "Bubble Charts"
+      },`
+            );
 
+            this.replaceContent(`${webappDir}app/entities/product/product.component.html`, 's*chartsApp.', `${this.baseName}App.`, true);
+            this.replaceContent(`${webappDir}app/entities/product/product.route.ts`, 's*chartsApp.', `${this.baseName}App.`, true);
+            this.replaceContent(
+                `${webappDir}app/entities/product/product-detail.component.html`,
+                's*chartsApp.',
+                `${this.baseName}App.`,
+                true
+            );
+            this.replaceContent(
+                `${webappDir}app/entities/product/product-delete-dialog.component.html`,
+                's*chartsApp.',
+                `${this.baseName}App.`,
+                true
+            );
+            this.replaceContent(
+                `${webappDir}app/entities/product/product-update.component.html`,
+                's*chartsApp.',
+                `${this.baseName}App.`,
+                true
+            );
+
+            this.replaceContent(`${webappDir}app/entities/chart/chart.component.html`, 's*chartsApp.', `${this.baseName}App.`, true);
+
+            // add entities to menu
             this.rewriteFile(
                 `${webappDir}app/layouts/navbar/navbar.component.html`,
                 '<!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->',
                 `<li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                <span>
-                <fa-icon icon="th-list"></fa-icon>
-                <span>
-                Chart
-                </span>
-                </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                <li>
-                <a class="dropdown-item" routerLink="chart/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                <span>Multiple charts</span>
-                </li>
-                <li>
-                <a class="dropdown-item" routerLink="chart/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                <span>Single charts</span>
-                </li>
-                <li>
-                <a class="dropdown-item" routerLink="chart/3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                <span>Bubble charts</span>
-                </li>
-                </ul>
-                </li>`
+                            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="ngxCharts">
+                                <span>
+                                    <fa-icon icon="th-list"></fa-icon>
+                                        <span jhiTranslate="global.menu.ngxCharts.main">
+                                            Chart
+                                        </span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+                                <li>
+                                    <a class="dropdown-item" routerLink="chart/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.ngxCharts.multipleCharts">
+                                            Multiple charts
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" routerLink="chart/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.ngxCharts.singleCharts">
+                                            Single charts
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" routerLink="chart/3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.ngxCharts.bubbleCharts">
+                                            Bubble charts
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>`
             );
             this.addEntityToMenu('product', false, this.clientFramework);
 

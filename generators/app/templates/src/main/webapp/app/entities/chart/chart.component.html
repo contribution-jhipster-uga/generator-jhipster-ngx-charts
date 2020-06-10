@@ -1,6 +1,6 @@
 <div class="chart">
     <h2 id="page-heading">
-        <span jhiTranslate="chartsApp.chart.home.title">Chart</span>
+        <span jhiTranslate="chartsApp.ngxCharts.chart.home.title">Chart</span>
     </h2>
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
@@ -13,19 +13,23 @@
 
     <div class="col">
         <div class="row">
-            <h3>Options</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.options">Options</span>
+            </h3>
         </div>
         <div class="row options">
-            Color set: <select style="margin-left: 10px;" [ngModel]="selectedColorScheme"
+            <span jhiTranslate="chartsApp.ngxCharts.chart.home.colorSet">Color set</span>:
+            <select style="margin-left: 10px;" [ngModel]="selectedColorScheme"
                 (ngModelChange)="setColorScheme($event)">
-                <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{ scheme.name }}</option>
+                <option *ngFor="let scheme of colorSets" [value]="scheme.name" jhiTranslate="{{'timsApp.ngxCharts.chart.colorSets.' + scheme.name}}">{{ scheme.name }}</option>
             </select>
         </div>
 
         <div class="row options">
-            Theme: <select [ngModel]="theme" (ngModelChange)="theme = $event">
-                <option [value]="'dark'">Dark</option>
-                <option [value]="'light'">Light</option>
+            <span jhiTranslate="chartsApp.ngxCharts.chart.home.theme">Theme</span>:
+            <select style="margin-left: 10px;" [ngModel]="theme" (ngModelChange)="theme = $event">
+                <option [value]="'dark'" jhiTranslate="{{'timsApp.ngxCharts.chart.themes.dark'}}">Dark</option>
+                <option [value]="'light'" jhiTranslate="{{'timsApp.ngxCharts.chart.themes.light'}}">Light</option>
             </select>
         </div>
 
@@ -35,7 +39,9 @@
 
 
         <div class="row">
-            <h3>Area chart stacked</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.areaChartStacked">Area chart stacked</span>
+            </h3>
         </div>
         <div class="row">
             <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" (select)="select($event)"
@@ -46,7 +52,9 @@
             </ngx-charts-area-chart-stacked>
         </div>
         <div class="row">
-            <h3>Polar chart</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.polarChart">Polar chart</span>
+            </h3>
         </div>
         <div class="row">
             <ngx-charts-polar-chart [view]="view" [scheme]="colorScheme" (select)="select($event)"
@@ -59,7 +67,9 @@
         </div>
 
         <div class="row">
-            <h3>Heat map</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.heatMap">Heat Map</span>
+            </h3>
         </div>
         <div class="row">
             <ngx-charts-heat-map class="chart-container" [min]="heatmapMin" [max]="heatmapMax" [view]="view"
@@ -97,7 +107,9 @@
 
     <div *ngIf="chart.single" class="col" [class]="theme">
         <div class="row">
-            <h3>Bar vertical</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.barVertical">Bar vertical</span>
+            </h3>
         </div>
         <div class="row">
 
@@ -109,7 +121,9 @@
             </ngx-charts-bar-vertical>
         </div>
         <div class="row">
-            <h3>Advanced pie chart</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.advancedPieChart">Advanced pie chart</span>
+            </h3>
         </div>
         <div class="row">
 
@@ -120,7 +134,9 @@
         </div>
 
         <div class="row">
-            <h3>Tree Map</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.treeMap">Tree Map</span>
+            </h3>
         </div>
         <div class="row">
             <ngx-charts-tree-map class="chart-container" [view]="view" (legendLabelClick)="onLegendLabelClick($event)"
@@ -132,7 +148,9 @@
         </div>
 
         <div class="row">
-            <h3>Number Map</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.numberMap">Number Map</span>
+            </h3>
         </div>
         <div class="row">
             <ngx-charts-number-card class="chart-container" [view]="view"
@@ -143,7 +161,9 @@
         </div>
 
         <div class="row">
-            <h3>Gauge</h3>
+            <h3>
+                <span jhiTranslate="chartsApp.ngxCharts.chart.home.gauge">Gauge</span>
+            </h3>
         </div>
         <div class="row">
             <ngx-charts-gauge class="chart-container" [view]="view" [legend]="showLegend" [legendTitle]="legendTitle"
@@ -161,7 +181,9 @@
     <div>
         <div *ngIf="chart.bubble" class="col" [class]="theme">
             <div class="row">
-                <h3>Bubble Chart</h3>
+                <h3>
+                    <span jhiTranslate="chartsApp.ngxCharts.chart.home.bubbleChart">Bubble Chart</span>
+                </h3>
             </div>
             <div class="row">
                 <ngx-charts-bubble-chart class="chart-container"

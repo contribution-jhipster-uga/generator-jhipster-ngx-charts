@@ -40,7 +40,7 @@ export const productRoute: Routes = [
     component: ProductComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
@@ -52,7 +52,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
@@ -64,7 +64,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
@@ -76,7 +76,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   }

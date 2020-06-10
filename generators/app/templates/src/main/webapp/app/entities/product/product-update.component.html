@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-product-heading" jhiTranslate="chartsApp.product.home.createOrEditLabel">Create or edit a Product</h2>
+            <h2 id="jhi-product-heading" jhiTranslate="chartsApp.ngxCharts.product.home.createOrEditLabel">Create or edit a Product</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
@@ -10,7 +10,7 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="chartsApp.product.name" for="field_name">Name</label>
+                    <label class="form-control-label" jhiTranslate="chartsApp.ngxCharts.product.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                     <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
@@ -21,13 +21,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="chartsApp.product.country" for="field_country">Country</label>
+                    <label class="form-control-label" jhiTranslate="chartsApp.ngxCharts.product.country" for="field_country">Country</label>
                     <select class="form-control" name="country" formControlName="country" id="field_country">
-                        <option value="BELGIUM">{{'chartsApp.Country.BELGIUM' | translate}}</option>
-                        <option value="FRANCE">{{'chartsApp.Country.FRANCE' | translate}}</option>
-                        <option value="ITALY">{{'chartsApp.Country.ITALY' | translate}}</option>
-                        <option value="GERMANY">{{'chartsApp.Country.GERMANY' | translate}}</option>
-                        <option value="SPAIN">{{'chartsApp.Country.SPAIN' | translate}}</option>
+                        <option value="BELGIUM">{{'chartsApp.ngxCharts.Country.BELGIUM' | translate}}</option>
+                        <option value="FRANCE">{{'chartsApp.ngxCharts.Country.FRANCE' | translate}}</option>
+                        <option value="ITALY">{{'chartsApp.ngxCharts.Country.ITALY' | translate}}</option>
+                        <option value="GERMANY">{{'chartsApp.ngxCharts.Country.GERMANY' | translate}}</option>
+                        <option value="SPAIN">{{'chartsApp.ngxCharts.Country.SPAIN' | translate}}</option>
                     </select>
                     <div *ngIf="editForm.get('country').invalid && (editForm.get('country').dirty || editForm.get('country').touched)">
                         <small class="form-text text-danger"
@@ -37,15 +37,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="chartsApp.product.color" for="field_color">Color</label>
+                    <label class="form-control-label" jhiTranslate="chartsApp.ngxCharts.product.color" for="field_color">Color</label>
                     <select class="form-control" name="color" formControlName="color" id="field_color">
-                        <option value="RED">{{'chartsApp.Color.RED' | translate}}</option>
-                        <option value="YELLOW">{{'chartsApp.Color.YELLOW' | translate}}</option>
-                        <option value="GREEN">{{'chartsApp.Color.GREEN' | translate}}</option>
-                        <option value="BLUE">{{'chartsApp.Color.BLUE' | translate}}</option>
-                        <option value="CYAN">{{'chartsApp.Color.CYAN' | translate}}</option>
-                        <option value="BLACK">{{'chartsApp.Color.BLACK' | translate}}</option>
-                        <option value="WHITE">{{'chartsApp.Color.WHITE' | translate}}</option>
+                        <option value="RED">{{'chartsApp.ngxCharts.Color.RED' | translate}}</option>
+                        <option value="YELLOW">{{'chartsApp.ngxCharts.Color.YELLOW' | translate}}</option>
+                        <option value="GREEN">{{'chartsApp.ngxCharts.Color.GREEN' | translate}}</option>
+                        <option value="BLUE">{{'chartsApp.ngxCharts.Color.BLUE' | translate}}</option>
+                        <option value="CYAN">{{'chartsApp.ngxCharts.Color.CYAN' | translate}}</option>
+                        <option value="BLACK">{{'chartsApp.ngxCharts.Color.BLACK' | translate}}</option>
+                        <option value="WHITE">{{'chartsApp.ngxCharts.Color.WHITE' | translate}}</option>
                     </select>
                     <div *ngIf="editForm.get('color').invalid && (editForm.get('color').dirty || editForm.get('color').touched)">
                         <small class="form-text text-danger"
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="chartsApp.product.quantity" for="field_quantity">Quantity</label>
+                    <label class="form-control-label" jhiTranslate="chartsApp.ngxCharts.product.quantity" for="field_quantity">Quantity</label>
                     <input type="number" class="form-control" name="quantity" id="field_quantity"
                            formControlName="quantity"/>
                     <div *ngIf="editForm.get('quantity').invalid && (editForm.get('quantity').dirty || editForm.get('quantity').touched)">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="chartsApp.product.price" for="field_price">Price</label>
+                    <label class="form-control-label" jhiTranslate="chartsApp.ngxCharts.product.price" for="field_price">Price</label>
                     <input type="number" class="form-control" name="price" id="field_price"
                            formControlName="price"/>
                     <div *ngIf="editForm.get('price').invalid && (editForm.get('price').dirty || editForm.get('price').touched)">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="chartsApp.product.date" for="field_date">Date</label>
+                    <label class="form-control-label" jhiTranslate="chartsApp.ngxCharts.product.date" for="field_date">Date</label>
                     <div class="d-flex">
                         <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
