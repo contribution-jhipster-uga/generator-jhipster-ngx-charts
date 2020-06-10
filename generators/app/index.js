@@ -190,6 +190,18 @@ module.exports = class extends BaseGenerator {
       }`
             );
 
+            // add BrowserAnimationsModule
+            this.rewriteFile(
+                `${webappDir}app/app.module.ts`,
+                '// jhipster-needle-angular-add-module-import JHipster will add new module here',
+                "import { BrowserAnimationsModule } from '@angular/platform-browser/animations';"
+            );
+            this.rewriteFile(
+                `${webappDir}app/app.module.ts`,
+                '// jhipster-needle-angular-add-module JHipster will add new module here',
+                'BrowserAnimationsModule,'
+            );
+
             let baseNameUpperCase = this.baseName;
             baseNameUpperCase = baseNameUpperCase.cleanup();
             // eslint-disable-next-line no-console
@@ -240,7 +252,7 @@ module.exports = class extends BaseGenerator {
         this.rewriteFile(
             `${javaDir}config/CacheConfiguration.java`,
             '// jhipster-needle-ehcache-add-entry',
-            `createCache(cm, ${this.packageName}.domain.Product.class.getName();`
+            `createCache(cm, ${this.packageName}.domain.Product.class.getName());`
         );
 
         // add domain Product and enumartions
