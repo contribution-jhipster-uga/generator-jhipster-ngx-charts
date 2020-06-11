@@ -21,15 +21,15 @@
             <span jhiTranslate="chartsApp.ngxCharts.chart.home.colorSet">Color set</span>:
             <select style="margin-left: 10px;" [ngModel]="selectedColorScheme"
                 (ngModelChange)="setColorScheme($event)">
-                <option *ngFor="let scheme of colorSets" [value]="scheme.name" jhiTranslate="{{'timsApp.ngxCharts.chart.colorSets.' + scheme.name}}">{{ scheme.name }}</option>
+                <option *ngFor="let scheme of colorSets" [value]="scheme.name" jhiTranslate="{{'chartsApp.ngxCharts.chart.colorSets.' + scheme.name}}">{{ scheme.name }}</option>
             </select>
         </div>
 
         <div class="row options">
             <span jhiTranslate="chartsApp.ngxCharts.chart.home.theme">Theme</span>:
             <select style="margin-left: 10px;" [ngModel]="theme" (ngModelChange)="theme = $event">
-                <option [value]="'dark'" jhiTranslate="{{'timsApp.ngxCharts.chart.themes.dark'}}">Dark</option>
-                <option [value]="'light'" jhiTranslate="{{'timsApp.ngxCharts.chart.themes.light'}}">Light</option>
+                <option [value]="'dark'" jhiTranslate="{{'chartsApp.ngxCharts.chart.themes.dark'}}">Dark</option>
+                <option [value]="'light'" jhiTranslate="{{'chartsApp.ngxCharts.chart.themes.light'}}">Light</option>
             </select>
         </div>
 

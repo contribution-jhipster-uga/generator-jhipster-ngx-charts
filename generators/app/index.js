@@ -4,7 +4,6 @@ const BaseGenerator = require('generator-jhipster/generators/generator-base');
 const jhipsterConstants = require('generator-jhipster/generators/generator-constants');
 const fs = require('fs');
 const packagejs = require('../../package.json');
-const genUtils = require('../utils');
 
 module.exports = class extends BaseGenerator {
     get initializing() {
@@ -141,42 +140,68 @@ module.exports = class extends BaseGenerator {
             );
 
             // add i18n
-            const files = [];
             if (this.enableTranslation && !this.skipClient) {
                 this.languages.forEach(language => {
-                    let sourceLanguage = 'en';
                     if (fs.existsSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/ngxCharts.json`)) {
-                        sourceLanguage = language;
+                        this.fs.copy(
+                            this.templatePath(`${this.templatePath()}/src/main/webapp/i18n/${language}/ngxCharts.json`),
+                            this.destinationPath(`${webappDir}i18n/${language}/ngxCharts.json`)
+                        );
+                        this.replaceContent(`${webappDir}i18n/${language}/ngxCharts.json`, 's*chartsApp', `${this.baseName}App`, true);
                     }
-                    files.push({
-                        from: `${webappDir}i18n/${sourceLanguage}/ngxCharts.json`,
-                        to: `${webappDir}i18n/${language}/ngxCharts.json`
-                    });
                 });
             }
-            genUtils.copyFiles(this, files);
-            this.rewriteFile(
-                `${webappDir}i18n/zh-cn/global.json`,
-                '"jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)"',
-                `
-      "ngxCharts": {
-        "main": "图表",
-        "multipleCharts": "多维图表",
-        "singleCharts": "单维图表",
-        "bubbleCharts": "气泡图表"
-      },`
-            );
-            this.rewriteFile(
-                `${webappDir}i18n/en/global.json`,
-                '"jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)"',
-                `
-      "ngxCharts": {
-        "main": "Chart",
-        "multipleCharts": "Multiple charts",
-        "singleCharts": "Single Charts",
-        "bubbleCharts": "Bubble Charts"
-      },`
-            );
+
+            // modify global
+            if (this.enableTranslation && !this.skipClient) {
+                this.languages.forEach(language => {
+                    let menuText = 'Charts';
+                    try {
+                        menuText = JSON.parse(
+                            fs.readFileSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/global.json`, 'utf8')
+                        ).global.menu.ngxCharts;
+                    } catch (e) {
+                        this.log('Cannot parse file');
+                    }
+                    this.addElementTranslationKey('ngxCharts', menuText, language);
+                    menuText = 'ngx-charts Product';
+                    try {
+                        menuText = JSON.parse(
+                            fs.readFileSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/global.json`, 'utf8')
+                        ).global.menu.entities.ngxChartsProductSdmSuffix;
+                    } catch (e) {
+                        this.log('Cannot parse file');
+                    }
+                    this.addEntityTranslationKey('ngxChartsProductSdmSuffix', menuText, language);
+                    menuText = 'Multiple charts';
+                    try {
+                        menuText = JSON.parse(
+                            fs.readFileSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/global.json`, 'utf8')
+                        ).global.menu.entities.multipleCharts;
+                    } catch (e) {
+                        this.log('Cannot parse file');
+                    }
+                    this.addEntityTranslationKey('multipleCharts', menuText, language);
+                    menuText = 'Single Charts';
+                    try {
+                        menuText = JSON.parse(
+                            fs.readFileSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/global.json`, 'utf8')
+                        ).global.menu.entities.singleCharts;
+                    } catch (e) {
+                        this.log('Cannot parse file');
+                    }
+                    this.addEntityTranslationKey('singleCharts', menuText, language);
+                    menuText = 'Bubble Charts';
+                    try {
+                        menuText = JSON.parse(
+                            fs.readFileSync(`${this.templatePath()}/src/main/webapp/i18n/${language}/global.json`, 'utf8')
+                        ).global.menu.entities.bubbleCharts;
+                    } catch (e) {
+                        this.log('Cannot parse file');
+                    }
+                    this.addEntityTranslationKey('bubbleCharts', menuText, language);
+                });
+            }
 
             this.replaceContent(`${webappDir}app/entities/product/product.component.html`, 's*chartsApp.', `${this.baseName}App.`, true);
             this.replaceContent(`${webappDir}app/entities/product/product.route.ts`, 's*chartsApp.', `${this.baseName}App.`, true);
@@ -205,44 +230,45 @@ module.exports = class extends BaseGenerator {
             this.rewriteFile(
                 `${webappDir}app/layouts/navbar/navbar.component.html`,
                 '<!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->',
-                `<li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="ngxCharts">
-                                <span>
-                                    <fa-icon icon="th-list"></fa-icon>
-                                        <span jhiTranslate="global.menu.ngxCharts.main">
-                                            Chart
-                                        </span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                                <li>
-                                    <a class="dropdown-item" routerLink="chart/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                        <span jhiTranslate="global.menu.ngxCharts.multipleCharts">
-                                            Multiple charts
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" routerLink="chart/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                        <span jhiTranslate="global.menu.ngxCharts.singleCharts">
-                                            Single charts
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" routerLink="chart/3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                        <span jhiTranslate="global.menu.ngxCharts.bubbleCharts">
-                                            Bubble charts
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>`
+                `
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="ngxCharts">
+                    <span>
+                        <fa-icon icon="th-list"></fa-icon>
+                            <span jhiTranslate="global.menu.ngxCharts">
+                                Chart
+                            </span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="ngxCharts">
+                    <li>
+                        <a class="dropdown-item" routerLink="chart/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.multipleCharts">
+                                Multiple charts
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="chart/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.singleCharts">
+                                Single charts
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="chart/3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.bubbleCharts">
+                                Bubble charts
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>`
             );
-            this.addEntityToMenu('product', false, this.clientFramework);
+            this.addEntityToMenu('product', true, this.clientFramework, 'ngxChartsProductSdmSuffix');
 
             // add entity to module
             this.rewriteFile(

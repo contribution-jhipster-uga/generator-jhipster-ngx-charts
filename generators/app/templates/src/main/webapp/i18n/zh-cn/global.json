@@ -1,0 +1,13 @@
+{
+    "global": {
+        "menu": {
+            "ngxCharts": "图表",
+            "entities": {
+                "ngxChartsProductSdmSuffix": "图表数据",
+                "multipleCharts": "多维图表",
+                "singleCharts": "单维图表",
+                "bubbleCharts": "气泡图表"
+            }
+        }
+    }
+}
