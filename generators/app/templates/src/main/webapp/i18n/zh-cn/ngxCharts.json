@@ -1,0 +1,98 @@
+{
+    "chartsApp": {
+        "ngxCharts": {
+            "chart": {
+                "home": {
+                    "title": "统计图表",
+                    "createLabel": "创建新 统计图表",
+                    "createOrEditLabel": "创建或编辑 统计图表",
+                    "search": "查找 统计图表",
+                    "notFound": "统计图表没找到",
+                    "options": "选项",
+                    "colorSet": "色系",
+                    "theme": "主题",
+                    "areaChartStacked": "堆积面积图",
+                    "polarChart": "极坐标图",
+                    "heatMap": "热力图",
+                    "barVertical": "竖条",
+                    "advancedPieChart": "高级饼图",
+                    "treeMap": "树图",
+                    "numberMap": "数字图",
+                    "gauge": "仪表盘图",
+                    "bubbleChart": "气泡图"
+                },
+                "colorSets": {
+                    "vivid": "生动",
+                    "natural": "自然",
+                    "cool": "凉爽",
+                    "fire": "炉火",
+                    "solar": "太阳",
+                    "air": "空气",
+                    "aqua": "水色",
+                    "flame": "火焰",
+                    "ocean": "海洋",
+                    "forest": "森林",
+                    "horizon": "地平线",
+                    "neons": "霓虹灯",
+                    "picnic": "野餐",
+                    "night": "夜晚",
+                    "nightLights": "夜灯"
+                },
+                "themes": {
+                    "dark": "深色",
+                    "light": "浅色"
+                }
+            },
+            "product": {
+                "home": {
+                    "title": "产品",
+                    "createLabel": "创建新 产品",
+                    "createOrEditLabel": "创建或编辑 产品",
+                    "search": "查找 产品",
+                    "notFound": "产品没找到",
+                    "Options": "选项"
+                },
+                "created": "产品 {{ param }} 创建成功",
+                "updated": "产品 {{ param }} 更新成功",
+                "deleted": "产品 {{ param }} 删除成功",
+                "delete": {
+                    "question": "你确定要删除 产品 {{ id }} 吗？"
+                },
+                "detail": {
+                    "title": "产品"
+                },
+                "name": "名称",
+                "country": "国家",
+                "color": "颜色",
+                "quantity": "数量",
+                "price": "价格",
+                "date": "日期",
+                "help": {
+                    "name": "名称",
+                    "country": "国家",
+                    "color": "颜色",
+                    "quantity": "数量",
+                    "price": "价格",
+                    "date": "日期"
+                }
+            },
+            "country": {
+                "ITALY": "意大利",
+                "GERMANY": "德国",
+                "BELGIUM": "比利时",
+                "SPAIN": "西班牙",
+                "FRANCE": "法国",
+                "CHINA": "中国"
+            },
+            "color": {
+                "BLACK": "黑色",
+                "BLUE": "蓝色",
+                "CYAN": "青色",
+                "GREEN": "绿色",
+                "RED": "红色",
+                "WHITE": "白色",
+                "YELLOW": "黄色"
+            }
+        }
+    }
+}

@@ -1,0 +1,93 @@
+{
+    "chartsApp": {
+        "ngxCharts": {
+            "chart": {
+                "home": {
+                    "title": "Chart",
+                    "options": "Options",
+                    "colorSet": "ColorSet",
+                    "theme": "Theme",
+                    "areaChartStacked": "Area Chart Stacked",
+                    "polarChart": "Polar Chart",
+                    "heatMap": "Heat Map",
+                    "barVertical": "Bar Vertical",
+                    "advancedPieChart": "Advanced Pie Chart",
+                    "treeMap": "TreeMap",
+                    "numberMap": "Number Map",
+                    "gauge": "Gauge",
+                    "bubbleChart": "Bubble Chart"
+                },
+                "colorSets": {
+                    "vivid": "vivid",
+                    "natural": "natural",
+                    "cool": "cool",
+                    "fire": "fire",
+                    "solar": "solar",
+                    "air": "air",
+                    "aqua": "aqua",
+                    "flame": "flame",
+                    "ocean": "ocean",
+                    "forest": "forest",
+                    "horizon": "horizon",
+                    "neons": "neons",
+                    "picnic": "picnic",
+                    "night": "night",
+                    "nightLights": "nightLights"
+                },
+                "themes": {
+                    "dark": "Dark",
+                    "light": "Light"
+                }
+            },
+            "product": {
+                "home": {
+                    "title": "Product",
+                    "createLabel": "Create a new Product",
+                    "createOrEditLabel": "Create or edit a Product",
+                    "search": "Search for Product",
+                    "notFound": "No Products found"
+                },
+                "created": "A new Product is created with identifier {{ param }}",
+                "updated": "A Product is updated with identifier {{ param }}",
+                "deleted": "A Product is deleted with identifier {{ param }}",
+                "delete": {
+                    "question": "Are you sure you want to delete Product {{ id }}?"
+                },
+                "detail": {
+                    "title": "Product"
+                },
+                "name": "Name",
+                "country": "Country",
+                "color": "Color",
+                "quantity": "Quantity",
+                "price": "Price",
+                "date": "Date",
+                "help": {
+                    "name": "Name",
+                    "country": "Country",
+                    "color": "Color",
+                    "quantity": "Quantity",
+                    "price": "Price",
+                    "date": "Date"
+                }
+            },
+            "country": {
+                "ITALY": "ITALY",
+                "GERMANY": "GERMANY",
+                "BELGIUM": "BELGIUM",
+                "SPAIN": "SPAIN",
+                "FRANCE": "FRANCE",
+                "CHINA": "CHINA"
+            },
+            "color": {
+                "BLACK": "BLACK",
+                "BLUE": "BLUE",
+                "CYAN": "CYAN",
+                "GREEN": "GREEN",
+                "RED": "RED",
+                "WHITE": "WHITE",
+                "YELLOW": "YELLOW"
+            }
+        }
+    }
+}

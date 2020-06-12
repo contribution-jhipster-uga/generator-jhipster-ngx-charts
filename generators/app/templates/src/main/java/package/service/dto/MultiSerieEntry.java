@@ -1,5 +1,5 @@
 
-//<--! package -->
+// <--! package -->
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
 
-//<--! import -->
+// <--! import -->
 
 public class MultiSerieEntry implements Serializable {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +51,7 @@ public class MultiSerieEntry implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * @return the series
 	 */
@@ -69,7 +69,7 @@ public class MultiSerieEntry implements Serializable {
 	public static List<MultiSerieEntry> convertFrom(List<MultiSerieEntryProjection> l) {
 		if (l != null) {
 			List<MultiSerieEntry> res = new ArrayList<MultiSerieEntry>();
-			
+
 			Map<String,List<SerieEntry>> m = new HashMap<String,List<SerieEntry>>();
 			for (Iterator iterator = l.iterator(); iterator.hasNext();) {
 				MultiSerieEntryProjection s = (MultiSerieEntryProjection) iterator.next();
@@ -80,7 +80,7 @@ public class MultiSerieEntry implements Serializable {
 				}
 				lse.add(new SerieEntry(s.getName(), s.getValue()));
 			}
-			
+
 			for (Iterator it = m.entrySet().iterator(); it.hasNext();) {
 				Map.Entry<String, List<SerieEntry>> e = (Map.Entry<String, List<SerieEntry>>) it.next();
 				res.add(new MultiSerieEntry(e.getKey(),e.getValue()));

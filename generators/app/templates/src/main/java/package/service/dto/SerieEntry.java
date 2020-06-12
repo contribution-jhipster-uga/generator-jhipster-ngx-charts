@@ -1,5 +1,5 @@
 
-//<--! package -->
+// <--! package -->
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,12 +10,12 @@ import javax.persistence.Id;
 
 import io.swagger.annotations.ApiModelProperty;
 
-//<--! import -->
+// <--! import -->
 
 public class SerieEntry implements Serializable, SerieEntryProjection {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -1,0 +1,13 @@
+{
+    "global": {
+        "menu": {
+            "ngxCharts": "Charts",
+            "entities": {
+                "ngxChartsProductSdmSuffix": "ngx-charts Product",
+                "multipleCharts": "Multiple charts",
+                "singleCharts": "Single Charts",
+                "bubbleCharts": "Bubble Charts"
+            }
+        }
+    }
+}

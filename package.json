@@ -1,6 +1,6 @@
 {
   "name": "generator-jhipster-ngx-charts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Deploy functionnal ngx-charts (Single Entry, Multiple Entry, Bubble Chart)",
   "keywords": [
     "yeoman-generator",
@@ -31,7 +31,7 @@
     "yeoman-generator": "4.4.0"
   },
   "devDependencies": {
-    "eslint": "6.8.0",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-prettier": "6.9.0",
     "eslint-plugin-import": "2.19.1",

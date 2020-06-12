@@ -10,15 +10,15 @@ import { ProductService } from './product.service';
   templateUrl: './product-delete-dialog.component.html'
 })
 export class ProductDeleteDialogComponent {
-  product: IProduct;
+  product!: IProduct;
 
   constructor(protected productService: ProductService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear() {
+  clear(): void {
     this.activeModal.dismiss('cancel');
   }
 
-  confirmDelete(id: number) {
+  confirmDelete(id: number): void {
     this.productService.delete(id).subscribe(() => {
       this.eventManager.broadcast({
         name: 'productListModification',

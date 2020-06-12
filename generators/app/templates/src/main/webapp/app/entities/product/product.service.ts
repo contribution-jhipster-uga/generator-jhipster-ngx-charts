@@ -59,7 +59,7 @@ export class ProductService {
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.date = res.body.date != null ? moment(res.body.date) : null;
+      res.body.date = res.body.date != null ? moment(res.body.date) : undefined;
     }
     return res;
   }
@@ -67,7 +67,7 @@ export class ProductService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((product: IProduct) => {
-        product.date = product.date != null ? moment(product.date) : null;
+        product.date = product.date != null ? moment(product.date) : undefined;
       });
     }
     return res;

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { EMPTY, Observable, of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
+
 import { Product } from 'app/shared/model/product.model';
 import { ProductService } from './product.service';
 import { ProductComponent } from './product.component';
@@ -13,12 +14,21 @@ import { IProduct } from 'app/shared/model/product.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProductResolve implements Resolve<IProduct> {
-  constructor(private service: ProductService) {}
+  constructor(private service: ProductService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IProduct> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IProduct> | Observable<never> {
     const id = route.params['id'];
     if (id) {
-      return this.service.find(id).pipe(map((product: HttpResponse<Product>) => product.body));
+      return this.service.find(id).pipe(
+        flatMap((product: HttpResponse<Product>) => {
+          if (product.body) {
+            return of(product.body);
+          } else {
+            this.router.navigate(['404']);
+            return EMPTY;
+          }
+        })
+      );
     }
     return of(new Product());
   }
@@ -30,7 +40,7 @@ export const productRoute: Routes = [
     component: ProductComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
@@ -42,7 +52,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
@@ -54,7 +64,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
@@ -66,7 +76,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'chartsApp.product.home.title'
+      pageTitle: 'chartsApp.ngxCharts.product.home.title'
     },
     canActivate: [UserRouteAccessService]
   }
